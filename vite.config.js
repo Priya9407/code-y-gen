@@ -1,8 +1,11 @@
+// vite.config.js
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 
-// https://vite.dev/config/
 export default defineConfig({
   plugins: [vue()],
-  base: './' 
+  base: './',       // important for correct paths
+  build: {
+    outDir: 'dist'  // Vercel will look here
+  }
 })
