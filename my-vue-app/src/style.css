@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+  --bg-main: #000000;
+  --bg-section: #1A0508;
+  --accent: #E31B5A;
+  --accent-hover: #FF2E74;
+  --text-main: #FFFFFF;
+  --text-muted: #B8B8B8;
+  --inter:'Inter',sans-serif;
+}
+
+
+*{
+  margin: 0;
+  padding: 0;
+}
