@@ -1,161 +1,138 @@
 <template>
-  <section class="main-section">
-    <canvas ref="canvas" class="background-canvas"></canvas>
-
+  <section class="main-section" id="home">
     <div class="content">
-      <h1>&ltcode><br> <span class="center">{y}</span>
-        <br>gen</h1>
+      <h1 class="typing-wrapper">
+        &ltcode><br>
+
+        <span class="line">
+          <span class="accent">{{ line1 }}</span>
+        </span><br>
+
+        <span class="line">
+          <span class="white">{{ line2 }}</span>
+        </span>
+
+        <!-- SINGLE CURSOR -->
+        <span v-if="showCursor" class="cursor">|</span>
+      </h1>
+
       <p>Code for the young generation 🚀</p>
     </div>
   </section>
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted } from 'vue'
 
-const canvas = ref(null)
-let ctx, w, h, raf
+const fullLine1 = '{y}'
+const fullLine2 = 'gen'
 
-const mouse = { x: -9999, y: -9999 }
+const line1 = ref('')
+const line2 = ref('')
+const showCursor = ref(true)
 
-const TOKENS = [
-  'function', 'const', '{}', '()', '=>',
-  '</>', 'if', 'else', 'return', 'let',
-  'var', '&&', '||', '===', ';'
-]
+let typingCompleted = false // ✅ track if typing finished
 
-const streams = []
+const wait = (ms) => new Promise(res => setTimeout(res, ms))
 
-class CodeSymbol {
-  constructor(x, y, speed, size, opacity) {
-    this.x = x
-    this.y = y
-    this.speed = speed
-    this.size = size
-    this.opacity = opacity
-    this.text = TOKENS[Math.floor(Math.random() * TOKENS.length)]
+const typeOnce = async () => {
+  typingCompleted = false
+  line1.value = ''
+  line2.value = ''
+  showCursor.value = true
+
+  // line 1
+  for (let char of fullLine1) {
+    line1.value += char
+    await wait(120 + Math.random() * 80)
   }
 
-  update() {
-    this.y += this.speed
-    if (this.y > h + 40) {
-      this.y = -40
-      this.text = TOKENS[Math.floor(Math.random() * TOKENS.length)]
-    }
+  await wait(400)
 
-    const dx = this.x - mouse.x
-    const dy = this.y - mouse.y
-    const dist = Math.sqrt(dx * dx + dy * dy)
-
-    this.scale = dist < 120 ? 1.4 : 1
+  // line 2
+  for (let char of fullLine2) {
+    line2.value += char
+    await wait(120 + Math.random() * 80)
   }
 
-  draw() {
-    ctx.save()
-    ctx.translate(this.x, this.y)
-    ctx.scale(this.scale, this.scale)
-
-    ctx.font = `${this.size}px monospace`
-    ctx.fillStyle = `rgba(227,27,90,${this.opacity})`
-    ctx.shadowColor = 'rgba(227,27,90,0.35)'
-    ctx.shadowBlur = 10
-
-    ctx.fillText(this.text, 0, 0)
-    ctx.restore()
-  }
+  await wait(300)
+  showCursor.value = false
+  typingCompleted = true
 }
 
-const resize = () => {
-  w = canvas.value.width = window.innerWidth
-  h = canvas.value.height = window.innerHeight
+// ✅ only trigger typing again if finished
+const handleRepeat = (event) => {
+  const tag = event.target.tagName.toLowerCase()
+  if (tag === 'a' || tag === 'button') return
 
-  streams.length = 0
-  const spacing = 120
-
-  for (let x = 0; x < w; x += spacing) {
-    for (let i = 0; i < 6; i++) {
-      streams.push(
-        new CodeSymbol(
-          x + Math.random() * 40,
-          Math.random() * h,
-          Math.random() * 0.6 + 0.3,
-          Math.random() * 6 + 12,
-          Math.random() * 0.4 + 0.25
-        )
-      )
-    }
+  if (typingCompleted) {
+    typeOnce()
   }
-}
-
-const animate = () => {
-  ctx.clearRect(0, 0, w, h)
-
-  streams.forEach(s => {
-    s.update()
-    s.draw()
-  })
-
-  raf = requestAnimationFrame(animate)
-}
-
-const onMouseMove = (e) => {
-  mouse.x = e.clientX
-  mouse.y = e.clientY
 }
 
 onMounted(() => {
-  ctx = canvas.value.getContext('2d')
-  resize()
-  animate()
+  // start first animation after 2 seconds
+  setTimeout(() => {
+    typeOnce()
+  }, 2000)
 
-  window.addEventListener('resize', resize)
-  window.addEventListener('mousemove', onMouseMove)
-})
-
-onUnmounted(() => {
-  cancelAnimationFrame(raf)
-  window.removeEventListener('resize', resize)
-  window.removeEventListener('mousemove', onMouseMove)
+  window.addEventListener('click', handleRepeat)
+  window.addEventListener('keydown', handleRepeat)
 })
 </script>
 
 <style scoped>
 .main-section {
-  position: relative;
   min-height: 100vh;
-  background: radial-gradient(circle at top,
-      #160003,
-      #0f0000 70%);
-  overflow: hidden;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.3);
 }
 
-.background-canvas {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-}
-.center{
-  color:var(--accent);
-}
 .content {
-  position: relative;
-  z-index: 2;
   text-align: center;
-  color: white;
+  z-index: 2;
 }
 
 .content h1 {
   font-size: 3.5rem;
-  letter-spacing: 1px;
-  font-family: var(--inter);
+  line-height: 1.1;
+}
+
+.typing-wrapper {
+  display: inline-block;
+}
+
+.line {
+  display: inline-block;
+  min-height: 1em;
+}
+
+.accent {
+  color: var(--accent);
+}
+
+.white {
+  color: #ffffff;
+}
+
+/* Cursor */
+.cursor {
+  display: inline-block;
+  margin-left: 4px;
+  animation: blink 1s step-end infinite;
+  color: var(--accent);
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
 }
 
 .content p {
   margin-top: 0.5rem;
-  font-size: 1.2rem;
   opacity: 0.85;
 }
 </style>
