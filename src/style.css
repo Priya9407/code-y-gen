@@ -12,7 +12,9 @@
   --accent: #ff2e74;
   --accent-hover: #FF2E74;
   --blur-bg: rgba(39, 25, 25, 0.3);
+  --blur-bg2: #1a0508aa;
   --blur:blur(2px);
+  --card: rgba(38, 17, 17, 0.755);
 }
 
 /* 🌕 LIGHT MODE */
@@ -26,7 +28,9 @@
   --accent: #E31B5A;
   --accent-hover: #FF2E74;
   --blur-bg: rgba(0, 0, 0, 0.40);
+  --blur-bg2: #adaaaa;
   --blur:blur(2px);
+  --card: rgba(196, 165, 165, 0.65);
 }
 
 * {

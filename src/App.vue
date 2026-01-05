@@ -3,6 +3,9 @@ import NavBar from './components/NavBar.vue'
 import MainSection from './components/MainSection.vue'
 import AboutSection from './components/AboutSection.vue'
 import GlobalBackground from './components/GlobalBackground.vue'
+import EventsSection from './components/EventsSection.vue';
+import FooterSection from './components/FooterSection.vue';
+import ContactSection from './components/ContactSection.vue';
 </script>
 
 <template>
@@ -12,6 +15,10 @@ import GlobalBackground from './components/GlobalBackground.vue'
   <main>
     <MainSection />
     <AboutSection />
+    <EventsSection />
+    <ContactSection />
+    <FooterSection />
+
   </main>
 </template>
 

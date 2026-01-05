@@ -34,12 +34,12 @@
 
         <div class="glass-card accent">
           <h3>10+</h3>
-          <p>Events Conducted</p>
+          <p>Upcoming Events</p>
         </div>
 
         <div class="glass-card">
-          <h3>∞</h3>
-          <p>Ideas Built</p>
+          <h3>24/7</h3>
+          <p>Peer Support</p>
         </div>
 
         <div class="glass-card">
@@ -125,7 +125,7 @@
 }
 
 .glass-card {
-  background: rgba(15, 0, 0, 0.7); /* NOT solid */
+  background: var(--card); /* NOT solid */
   border-radius: 18px;
   padding: 2.2rem;
   text-align: center;
@@ -153,11 +153,12 @@
 }
 
 .glass-card.accent {
-  background: linear-gradient(
+  background: var(--card);
+  /* background: linear-gradient(
     145deg,
-    rgba(227, 27, 90, 0.35),
-    rgba(15, 0, 0, 0.7)
-  );
+    rgba(227, 178, 194, 0.623),
+    rgba(199, 125, 125, 0.7)
+  ); */
 }
 
 /* responsive */
