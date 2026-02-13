@@ -1,5 +1,4 @@
-<template>
-  <section id="team" class="team-section">
+<template> <section id="team" class="team-section">
     <h2>Our Team</h2>
     <div class="team-container">
       <div class="team-card" v-for="member in team" :key="member.email">
@@ -17,27 +16,37 @@
 </template>
 
 <script setup>
-// If using Vite, import images like this:
 import architaaImg from '../photos/architaa.png'
+import nithyaImg from '../photos/nithya.png' // <--- ADD THIS LINE
+import swathysreeImg from '../photos/swathysree.png'
+import durgeshImg from '../photos/durgesh.png'
+import abhiramImg from '../photos/abhiram.png'
+import hariImg from '../photos/hari.png'
+import joshithaImg from '../photos/joshitha.png'
+import priyaImg from '../photos/priya.png'
+import yohaImg from '../photos/yoha.png'
+import fcImg from '../photos/fc.png'
 
 const team = [
-  { name: "Dr.Prassanna J", designation: "Faculty Coordinator", email: "prassanna.j@vit.ac.in", image: "" },
-  { name: "Swathy Sree R", designation: "President", email: "swathysree@vitc.ac.in", image: "" },
-  { name: "Durgesh Kumar", designation: "Secretary", email: "durgesh.kumar2024@vitstudent.ac.in", image: "" },
+  { name: "Dr.Prassanna J", designation: "Faculty Coordinator", email: "prassanna.j@vit.ac.in", image: fcImg },
+  { name: "Swathy Sree R", designation: "President", email: "swathysree@vitc.ac.in", image: swathysreeImg },
+  { name: "Durgesh Kumar", designation: "Secretary", email: "durgesh.kumar2024@vitstudent.ac.in", image: durgeshImg },
   { name: "Architaa A", designation: "Deputy Secretary", email: "architaa.a2024@vitstudent.ac.in", image: architaaImg },
-  { name: "Nithya Kalaichelvan", designation: "Joint Secretary", email: "nithya.k2024@vitstudent.ac.in", image: "" },
-  { name: "Abhiram Anil", designation: "Partnership Lead", email: "abhiramanil2024@vitstudent.ac.in", image: "" },
-  { name: "Hari Hara Sudhan", designation: "AI/ML Lead", email: "hariharasudhan2024@vitstudent.ac.in", image: "" },
-  { name: "Joshitha Ramesh", designation: "Design Lead", email: "joshitha.ramesh2024@vitstudent.ac.in", image: "" },
-  { name: "Priya Dharshini V", designation: "Web Development Lead", email: "priydharshini.v2024a@vitstudent.ac.in", image: "" },
-  { name: "M Yoharudran Atsilia", designation: "Outreach Lead", email: "yoharudranatsilia.m2024@vitstudent.ac.in", image: "" }
+  { name: "Nithya Kalaichelvan", designation: "Joint Secretary", email: "nithya.k2024@vitstudent.ac.in", image: nithyaImg },
+  { name: "Abhiram Anil", designation: "Partnership Lead", email: "abhiramanil2024@vitstudent.ac.in", image: abhiramImg },
+  { name: "Hari Hara Sudhan", designation: "AI/ML Lead", email: "hariharasudhan2024@vitstudent.ac.in", image: hariImg },
+  { name: "Joshitha Ramesh", designation: "Design Lead", email: "joshitha.ramesh2024@vitstudent.ac.in", image: joshithaImg },
+  { name: "Priya Dharshini V", designation: "Web Development Lead", email: "priydharshini.v2024a@vitstudent.ac.in", image: priyaImg },
+  { name: "M Yoharudran Atsilia", designation: "Outreach Lead", email: "yoharudranatsilia.m2024@vitstudent.ac.in", image: yohaImg }
 ];
 </script>
 
 <style scoped>
 .team-section {
   padding: 6rem 2rem;
-  background: var(--blur-bg);
+  /* Remove opacity: 0.7; as it hides your content */
+  background: var(--bg-section); /* Use a solid background variable */
+  position: relative;
   opacity:0.7;
 }
 

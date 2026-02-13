@@ -55,6 +55,7 @@
       <li><a @click="scrollTo('departments')">Departments</a></li>
       <li><a @click="scrollTo('projects')">Projects</a></li>
       <li><a @click="scrollTo('team')">Team</a></li>
+      <li><a @click="scrollTo('gallery')">Gallery</a></li>
       <li class="mobile-cta">
         <button class="nav-btn" @click="scrollToContact">Contact Us</button>
       </li>
@@ -91,7 +92,7 @@ const scrollTo = (id) => {
 }
 
 const handleScroll = () => {
-  const sections = ['home', 'about', 'events', 'departments', 'projects', 'team']
+  const sections = ['home', 'about', 'events', 'departments', 'projects', 'team','gallery']
   const scrollPos = window.scrollY + window.innerHeight / 3
   for (let i = sections.length - 1; i >= 0; i--) {
     const section = document.getElementById(sections[i])

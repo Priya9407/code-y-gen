@@ -6,6 +6,7 @@ import GlobalBackground from './components/GlobalBackground.vue'
 import EventsSection from './components/EventsSection.vue';
 import Departments from './components/Departments.vue'
 import Team from './components/Team.vue'
+import Gallery from './components/Gallery.vue'
 import FooterSection from './components/FooterSection.vue';
 import ContactSection from './components/ContactSection.vue';
 
@@ -21,6 +22,7 @@ import ContactSection from './components/ContactSection.vue';
     <EventsSection />
     <Departments />
     <Team/>
+    <Gallery/>
     <ContactSection />
     <FooterSection />
 
