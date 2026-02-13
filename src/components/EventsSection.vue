@@ -13,7 +13,7 @@
           <div class="dot"></div>
 
           <div class="poster">
-            <img :src="event.poster" :alt="event.title" />
+            <img class="image" :src="event.poster" :alt="event.title" />
           </div>
 
           <div class="info">
@@ -35,40 +35,26 @@ const scrollWrapper = ref(null);
 
 const events = [
   {
-    title: "Code Catalyst",
-    poster: "/events/event1.jpeg",
-    date: "06 Jan 2026 | 2:00–5:00 PM",
-    venue: "AB3 – 101",
-    link: "https://forms.gle/WbXKMDtiqUBq7nUF8",
+    title: "Recode And Optimize",
+    poster: "/events/event6.JPG",
+    date: "15 Feb 2026 | 10:00 AM - 12:00 PM",
+    venue:"Online",
+    link: "https://docs.google.com/forms/d/e/1FAIpQLSdlpWPTfDeGXyai0eBqVWgJ_Ilr5yE9RuSSjFPDZbIEq91yLg/viewform?usp=publish-editor",
   },
   {
-    title: "Bug Busters: Code or Explode",
-    poster: "/events/event2.jpeg",
-    date: "07 Jan 2026 | 8:30 AM–4:00 PM",
-    venue: "AB3 – 101",
-    link: "https://docs.google.com/forms/d/e/1FAIpQLScugIkkWUND5LAx6qTHm1lgXXT15_CSmZ54qEhXuA7GN0lhZg/viewform?usp=header",
+    title: "Interpret X",
+    poster: "/events/event7.JPG",
+    date: "16 Feb 2026 | 8:00 AM – 1:00 PM",
+    venue: "AB3 – 201",
+    link: "https://forms.gle/S426zjo5udU7hvqv9",
   },
   {
-    title: "Code & Conquer with Comali",
-    poster: "/events/event3.jpeg",
-    date: "08 Jan 2026 | 8:30 AM–4:30 PM",
-    venue: "AB3 – 101 & 201",
-    link: "https://docs.google.com/forms/d/e/1FAIpQLSeeCuB8ZlWX7YteTunaLlnZpgKRCgZl7kB66hk_pnGqm3w5_A/viewform",
-  },
-  {
-    title: "Prompt Poster Making",
-    poster: "/events/event4.jpeg",
-    date: "09 Jan 2026 | 10:00 AM–12:00 PM",
-    venue: "AB3 – 101",
-    link: "https://forms.gle/7xUS2NogubpR1nYz9",
-  },
-  {
-    title: "The Final Code-Off",
-    poster: "/events/event5.jpeg",
-    date: "10 Jan 2026 | 2:00–4:00 PM",
-    venue: "AB3 – 101",
-    link: "https://forms.gle/zeJC3kyRqFbwBHPj8",
-  },
+    title: "Code Clash",
+    poster: "/events/event8.JPG",
+    date: "17 Feb 2026 | 2:00 PM – 4:00 PM",
+    venue: "AB3 – 201",
+    link: "https://docs.google.com/forms/d/e/1FAIpQLScaIR9ZNOrFzRWr6gd56oI-D805rZpftEMsaUyqfiLqPRkzUQ/viewform",
+  }
 ];
 
 const onWheel = (e) => {
@@ -125,6 +111,7 @@ onUnmounted(() => {
   color: var(--accent);
 }
 
+
 .scroll-wrapper {
   overflow-x: auto;
   overflow-y: hidden;
@@ -138,6 +125,7 @@ onUnmounted(() => {
 .timeline {
   position: relative;
   display: flex;
+  justify-content:center;
   gap: 120px;
   padding: 0 10vw 4rem;
   min-width: max-content;
@@ -176,6 +164,7 @@ onUnmounted(() => {
 
 .poster {
   width: 220px;
+  height:300px;
   border-radius: 18px;
   overflow: hidden;
   box-shadow: 0 0 30px rgba(227, 27, 90, 0.25);
@@ -183,8 +172,9 @@ onUnmounted(() => {
 }
 
 .poster img {
-  width: 100%;
-  height: auto;
+  width: 220px;
+  height: 300px;
+  object-fit:cover;
   display: block;
 }
 

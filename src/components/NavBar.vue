@@ -5,17 +5,28 @@
     </div>
 
     <!-- Desktop Links -->
+    
     <ul class="nav-links">
-      <li><a href="#home" :class="{ active: activeSection === 'home' }" @click.prevent="scrollTo('home')">Home</a></li>
-      <li><a href="#about" :class="{ active: activeSection === 'about' }" @click.prevent="scrollTo('about')">About</a>
+      <li>
+        <a href="#home" :class="{ active: activeSection === 'home' }" @click.prevent="scrollTo('home')">Home</a>
       </li>
-      <li><a href="#events" :class="{ active: activeSection === 'events' }"
-          @click.prevent="scrollTo('events')">Events</a></li>
-      <li><a href="#projects" :class="{ active: activeSection === 'projects' }"
-          @click.prevent="scrollTo('projects')">Team</a></li>
-      <li><a href="#team" :class="{ active: activeSection === 'team' }" @click.prevent="scrollTo('team')">Gallery</a>
+      <li>
+        <a href="#about" :class="{ active: activeSection === 'about' }" @click.prevent="scrollTo('about')">About</a>
+      </li>
+      <li>
+        <a href="#events" :class="{ active: activeSection === 'events' }" @click.prevent="scrollTo('events')">Events</a>
+      </li>
+      <li>
+        <a href="#departments" :class="{ active: activeSection === 'departments' }" @click.prevent="scrollTo('departments')">Departments</a>
+      </li>
+      <li>
+        <a href="#team" :class="{ active: activeSection === 'team' }" @click.prevent="scrollTo('team')">Team</a>
+      </li>
+      <li>
+        <a href="#gallery" :class="{ active: activeSection === 'gallery' }" @click.prevent="scrollTo('gallery')">Gallery</a>
       </li>
     </ul>
+    
 
     <div class="nav-actions">
       <!-- Theme Toggle -->
@@ -41,6 +52,7 @@
       <li><a @click="scrollTo('home')">Home</a></li>
       <li><a @click="scrollTo('about')">About</a></li>
       <li><a @click="scrollTo('events')">Events</a></li>
+      <li><a @click="scrollTo('departments')">Departments</a></li>
       <li><a @click="scrollTo('projects')">Projects</a></li>
       <li><a @click="scrollTo('team')">Team</a></li>
       <li class="mobile-cta">
@@ -79,7 +91,7 @@ const scrollTo = (id) => {
 }
 
 const handleScroll = () => {
-  const sections = ['home', 'about', 'events', 'projects', 'team']
+  const sections = ['home', 'about', 'events', 'departments', 'projects', 'team']
   const scrollPos = window.scrollY + window.innerHeight / 3
   for (let i = sections.length - 1; i >= 0; i--) {
     const section = document.getElementById(sections[i])
