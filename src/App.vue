@@ -4,8 +4,12 @@ import MainSection from './components/MainSection.vue'
 import AboutSection from './components/AboutSection.vue'
 import GlobalBackground from './components/GlobalBackground.vue'
 import EventsSection from './components/EventsSection.vue';
+import Departments from './components/Departments.vue'
+import Team from './components/Team.vue'
+import Gallery from './components/Gallery.vue'
 import FooterSection from './components/FooterSection.vue';
 import ContactSection from './components/ContactSection.vue';
+
 </script>
 
 <template>
@@ -16,6 +20,9 @@ import ContactSection from './components/ContactSection.vue';
     <MainSection />
     <AboutSection />
     <EventsSection />
+    <Departments />
+    <Team/>
+    <Gallery/>
     <ContactSection />
     <FooterSection />
 
