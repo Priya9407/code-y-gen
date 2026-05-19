@@ -1,78 +1,246 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
-:root {
-  --inter: 'Inter', sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
-  /* DARK MODE */
-  --bg-main: #120205;      /* ← DARK BACKGROUND */
-  --bg-section: #1A0508;
+/* ---------- GLOBAL RESET ---------- */
 
-  --text-main: #FFFFFF;
-  --text-muted: #B8B8B8;
-  --underline:var(--accent);
-  --accent: #ff2e74;
-  --accent-hover: #FF2E74;
-  --blur-bg: rgba(39, 25, 25, 0.3);
-  --blur-bg2: #1a0508aa;
-  --blur:blur(2px);
-  --card: rgba(38, 17, 17, 0.755);
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+
+  transition:
+  background-color .3s ease,
+  color .3s ease,
+  transform .3s ease;
 }
 
-/* 🌕 LIGHT MODE */
-[data-theme="light"] {
-  --bg-main: #FFFFFF;       /* ← WHITE BACKGROUND */
-  --bg-section: #F4F4F4;
-
-  --text-main: WHITE;     /* auto dark text */
-  --text-muted: #555555;
-  --underline:white;
-  --accent: #E31B5A;
-  --accent-hover: #FF2E74;
-  --blur-bg: rgba(0, 0, 0, 0.40);
-  --blur-bg2: #adaaaa;
-  --blur:blur(2px);
-  --card: rgba(196, 165, 165, 0.65);
+html{
+  scroll-behavior:smooth;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: var(--inter);
+body{
+  overflow-x:hidden;
 }
 
-html, body {
-  background: var(--bg-main);
-  color: var(--text-main);
-  transition: background-color 0.4s ease, color 0.4s ease;
+/* ---------- DARK THEME ---------- */
+
+:root{
+
+  --bg-main:#0f1117;
+  --bg-section:#171923;
+
+  --text-main:#ffffff;
+  --text-muted:#b6bcc8;
+
+  --accent:#ff2e74;
+  --accent-hover:#ff4d8a;
+
+  --card:rgba(255,255,255,.04);
+
+  --blur-bg:
+  rgba(255,255,255,.05);
+
+  --shadow:
+  0 10px 30px rgba(0,0,0,.25);
+
 }
 
-/* body::after {
-  content: '';
-  position: fixed;
-  width: 120px;
-  height: 120px;
-  background: radial-gradient(circle, rgba(227,27,90,0.25), transparent 70%);
-  pointer-events: none;
-  transform: translate(-50%, -50%);
-  left: var(--mx);
-  top: var(--my);
-  z-index: 1;
-} */
 
-body::after {
-  content: '';
-  position: fixed;
-  width: 140px;
-  height: 140px;
-  background: radial-gradient(
-    circle,
-    rgba(227,27,90,0.45),
-    transparent 70%
+/* ---------- LIGHT THEME ---------- */
+
+[data-theme="light"]{
+
+  --bg-main:#ffffff;
+  --bg-section:#f7f8fc;
+
+  --text-main:#111827;
+  --text-muted:#555;
+
+  --accent:#e31b5a;
+  --accent-hover:#ff2e74;
+
+  --card:#ffffff;
+
+  --blur-bg:
+  rgba(0,0,0,.05);
+
+  --shadow:
+  0 10px 25px rgba(0,0,0,.08);
+
+}
+
+
+/* ---------- BODY ---------- */
+
+html,
+body{
+
+  background:
+  var(--bg-main);
+
+  color:
+  var(--text-main);
+
+  min-height:100vh;
+
+}
+
+
+/* ---------- CURSOR GLOW ---------- */
+
+body::after{
+
+  content:'';
+
+  position:fixed;
+
+  left:var(--mx);
+  top:var(--my);
+
+  width:220px;
+  height:220px;
+
+  transform:
+  translate(-50%,-50%);
+
+  background:
+
+  radial-gradient(
+  circle,
+  rgba(255,46,116,.35),
+  transparent 70%
   );
-  pointer-events: none;
-  transform: translate(-50%, -50%);
-  left: var(--mx);
-  top: var(--my);
-  z-index: 1;
-  mix-blend-mode: screen;
+
+  pointer-events:none;
+
+  z-index:0;
+
+  filter:blur(10px);
+
+}
+
+
+/* ---------- BUTTONS ---------- */
+
+button{
+
+  border:none;
+
+  padding:
+
+  12px 24px;
+
+  border-radius:12px;
+
+  background:
+
+  linear-gradient(
+  135deg,
+  var(--accent),
+  #7c3aed
+  );
+
+  color:white;
+
+  font-weight:600;
+
+  cursor:pointer;
+
+  box-shadow:
+  var(--shadow);
+
+}
+
+button:hover{
+
+  transform:
+  translateY(-4px);
+
+}
+
+
+/* ---------- CARDS ---------- */
+
+.card,
+.feature-card,
+.team-card{
+
+  background:
+  var(--card);
+
+  backdrop-filter:
+  blur(10px);
+
+  border-radius:20px;
+
+  padding:20px;
+
+  box-shadow:
+  var(--shadow);
+
+}
+
+.card:hover,
+.feature-card:hover,
+.team-card:hover{
+
+  transform:
+  translateY(-8px);
+
+}
+
+
+/* ---------- LINKS ---------- */
+
+a{
+
+  color:
+  var(--text-main);
+
+  text-decoration:none;
+
+}
+
+a:hover{
+
+  color:
+  var(--accent);
+
+}
+
+
+/* ---------- SECTION SPACING ---------- */
+
+section{
+
+  padding:
+
+  80px 8%;
+
+}
+
+
+/* ---------- HEADINGS ---------- */
+
+h1{
+
+  font-size:3rem;
+  font-weight:700;
+
+}
+
+h2{
+
+  font-size:2.2rem;
+  margin-bottom:20px;
+
+}
+
+p{
+
+  color:
+  var(--text-muted);
+
+  line-height:1.8;
+
 }

@@ -1,138 +1,376 @@
 <template>
-  <section class="main-section" id="home">
-    <div class="content">
-      <h1 class="typing-wrapper">
-        &ltcode><br>
+<section class="main-section" id="home">
 
-        <span class="line">
-          <span class="accent">{{ line1 }}</span>
-        </span><br>
+<div class="content">
 
-        <span class="line">
-          <span class="white">{{ line2 }}</span>
-        </span>
+<h1 class="typing-wrapper">
 
-        <!-- SINGLE CURSOR -->
-        <span v-if="showCursor" class="cursor">|</span>
-      </h1>
+&ltcode><br>
 
-      <p>Code for the young generation 🚀</p>
-    </div>
-  </section>
+<span class="line">
+<span class="accent">
+{{ line1 }}
+</span>
+</span>
+
+<br>
+
+<span class="line">
+<span class="white">
+{{ line2 }}
+</span>
+</span>
+
+<span
+v-if="showCursor"
+class="cursor"
+>
+|
+</span>
+
+</h1>
+
+<p class="subtitle">
+Code for the young generation 🚀
+Building developers,
+innovators and creators.
+</p>
+
+
+<div class="buttons">
+
+<button>
+Join Us
+</button>
+
+<button class="secondary">
+Explore Events
+</button>
+
+</div>
+
+
+<div class="stats">
+
+<div>
+<h2>500+</h2>
+<p>Members</p>
+</div>
+
+<div>
+<h2>20+</h2>
+<p>Events</p>
+</div>
+
+<div>
+<h2>50+</h2>
+<p>Projects</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
 </template>
 
+
+
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref,onMounted } from 'vue'
 
-const fullLine1 = '{y}'
-const fullLine2 = 'gen'
+const fullLine1='{y}'
+const fullLine2='gen'
 
-const line1 = ref('')
-const line2 = ref('')
-const showCursor = ref(true)
+const line1=ref('')
+const line2=ref('')
+const showCursor=ref(true)
 
-let typingCompleted = false // ✅ track if typing finished
+let typingCompleted=false
 
-const wait = (ms) => new Promise(res => setTimeout(res, ms))
+const wait=(ms)=>
+new Promise(
+res=>setTimeout(res,ms)
+)
 
-const typeOnce = async () => {
-  typingCompleted = false
-  line1.value = ''
-  line2.value = ''
-  showCursor.value = true
+const typeOnce=async()=>{
 
-  // line 1
-  for (let char of fullLine1) {
-    line1.value += char
-    await wait(120 + Math.random() * 80)
-  }
+typingCompleted=false
 
-  await wait(400)
+line1.value=''
+line2.value=''
 
-  // line 2
-  for (let char of fullLine2) {
-    line2.value += char
-    await wait(120 + Math.random() * 80)
-  }
+showCursor.value=true
 
-  await wait(300)
-  showCursor.value = false
-  typingCompleted = true
+for(let char of fullLine1){
+
+line1.value+=char
+
+await wait(
+120+
+Math.random()*80
+)
+
 }
 
-// ✅ only trigger typing again if finished
-const handleRepeat = (event) => {
-  const tag = event.target.tagName.toLowerCase()
-  if (tag === 'a' || tag === 'button') return
+await wait(300)
 
-  if (typingCompleted) {
-    typeOnce()
-  }
+for(let char of fullLine2){
+
+line2.value+=char
+
+await wait(
+120+
+Math.random()*80
+)
+
 }
 
-onMounted(() => {
-  // start first animation after 2 seconds
-  setTimeout(() => {
-    typeOnce()
-  }, 2000)
+showCursor.value=false
 
-  window.addEventListener('click', handleRepeat)
-  window.addEventListener('keydown', handleRepeat)
+typingCompleted=true
+
+}
+
+const handleRepeat=(event)=>{
+
+const tag=
+event.target.tagName
+.toLowerCase()
+
+if(
+tag==='a'
+||
+tag==='button'
+)return
+
+if(
+typingCompleted
+){
+
+typeOnce()
+
+}
+
+}
+
+onMounted(()=>{
+
+setTimeout(
+()=>typeOnce(),
+1200
+)
+
+window.addEventListener(
+'click',
+handleRepeat
+)
+
 })
 </script>
 
+
+
 <style scoped>
-.main-section {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: rgba(0, 0, 0, 0.3);
+
+.main-section{
+
+min-height:100vh;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+text-align:center;
+
+padding:40px;
+
 }
 
-.content {
-  text-align: center;
-  z-index: 2;
+
+.content{
+
+z-index:2;
+
+max-width:900px;
+
 }
 
-.content h1 {
-  font-size: 3.5rem;
-  line-height: 1.1;
+
+.content h1{
+
+font-size:5rem;
+
+line-height:1;
+
+font-weight:700;
+
 }
 
-.typing-wrapper {
-  display: inline-block;
+
+.accent{
+
+color:
+var(--accent);
+
 }
 
-.line {
-  display: inline-block;
-  min-height: 1em;
+
+.white{
+
+color:white;
+
 }
 
-.accent {
-  color: var(--accent);
+
+.subtitle{
+
+margin-top:20px;
+
+font-size:1.2rem;
+
+color:#aaa;
+
+line-height:1.8;
+
 }
 
-.white {
-  color: #ffffff;
+
+.cursor{
+
+animation:
+blink 1s infinite;
+
+color:
+var(--accent);
+
 }
 
-/* Cursor */
-.cursor {
-  display: inline-block;
-  margin-left: 4px;
-  animation: blink 1s step-end infinite;
-  color: var(--accent);
+
+@keyframes blink{
+
+50%{
+
+opacity:0;
+
 }
 
-@keyframes blink {
-  50% {
-    opacity: 0;
-  }
 }
 
-.content p {
-  margin-top: 0.5rem;
-  opacity: 0.85;
+
+/* Buttons */
+
+.buttons{
+
+margin-top:35px;
+
+display:flex;
+
+justify-content:center;
+
+gap:20px;
+
+flex-wrap:wrap;
+
 }
+
+
+button{
+
+padding:
+14px 28px;
+
+border:none;
+
+border-radius:12px;
+
+background:
+linear-gradient(
+135deg,
+#ff2e74,
+#7c3aed
+);
+
+color:white;
+
+font-weight:600;
+
+cursor:pointer;
+
+}
+
+
+button:hover{
+
+transform:
+translateY(-5px);
+
+}
+
+
+.secondary{
+
+background:
+transparent;
+
+border:
+1px solid white;
+
+}
+
+
+/* Stats */
+
+.stats{
+
+margin-top:70px;
+
+display:flex;
+
+justify-content:center;
+
+gap:70px;
+
+flex-wrap:wrap;
+
+}
+
+
+.stats h2{
+
+font-size:2rem;
+
+color:
+var(--accent);
+
+}
+
+
+.stats p{
+
+opacity:.8;
+
+}
+
+
+/* Mobile */
+
+@media(max-width:768px){
+
+.content h1{
+
+font-size:3rem;
+
+}
+
+.stats{
+
+gap:30px;
+
+}
+
+}
+
 </style>

@@ -1,326 +1,453 @@
-<template>
-  <nav class="navbar">
-    <div class="logo">
-      Code<span class="y">Y</span>Gen
-    </div>
-
-    <!-- Desktop Links -->
-    
-    <ul class="nav-links">
-      <li>
-        <a href="#home" :class="{ active: activeSection === 'home' }" @click.prevent="scrollTo('home')">Home</a>
-      </li>
-      <li>
-        <a href="#about" :class="{ active: activeSection === 'about' }" @click.prevent="scrollTo('about')">About</a>
-      </li>
-      <li>
-        <a href="#events" :class="{ active: activeSection === 'events' }" @click.prevent="scrollTo('events')">Events</a>
-      </li>
-      <li>
-        <a href="#departments" :class="{ active: activeSection === 'departments' }" @click.prevent="scrollTo('departments')">Departments</a>
-      </li>
-      <li>
-        <a href="#team" :class="{ active: activeSection === 'team' }" @click.prevent="scrollTo('team')">Team</a>
-      </li>
-      <li>
-        <a href="#gallery" :class="{ active: activeSection === 'gallery' }" @click.prevent="scrollTo('gallery')">Gallery</a>
-      </li>
-    </ul>
-    
-
-    <div class="nav-actions">
-      <!-- Theme Toggle -->
-      <div class="theme-toggle" @click="toggleTheme">
-        <div class="orbit">
-          <i class="fa-solid fa-moon moon"></i>
-          <i class="fa-solid fa-sun sun"></i>
-        </div>
-      </div>
-
-      <!-- Contact Button -->
-      <button class="nav-btn" @click="scrollToContact">Contact Us</button>
-
-      <!-- Mobile Hamburger -->
-      <button class="mobile-btn" @click="menuOpen = !menuOpen">
-        <span v-if="!menuOpen">☰</span>
-        <span v-else>✕</span>
-      </button>
-    </div>
-
-    <!-- Mobile Menu -->
-    <ul v-if="menuOpen" class="mobile-menu">
-      <li><a @click="scrollTo('home')">Home</a></li>
-      <li><a @click="scrollTo('about')">About</a></li>
-      <li><a @click="scrollTo('events')">Events</a></li>
-      <li><a @click="scrollTo('departments')">Departments</a></li>
-      <li><a @click="scrollTo('projects')">Projects</a></li>
-      <li><a @click="scrollTo('team')">Team</a></li>
-      <li><a @click="scrollTo('gallery')">Gallery</a></li>
-      <li class="mobile-cta">
-        <button class="nav-btn" @click="scrollToContact">Contact Us</button>
-      </li>
-    </ul>
-  </nav>
-</template>
-
-<script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
-
-const menuOpen = ref(false)
-const isDark = ref(true)
-
-const toggleTheme = () => {
-  isDark.value = !isDark.value
-  document.documentElement.setAttribute(
-    'data-theme',
-    isDark.value ? 'dark' : 'light'
-  )
-}
-
-onMounted(() => {
-  document.documentElement.setAttribute('data-theme', 'dark')
-})
-
-const activeSection = ref('home')
-
-const scrollTo = (id) => {
-  const el = document.getElementById(id)
-  if (!el) return
-  el.scrollIntoView({ behavior: 'smooth', block: 'start' })
-  activeSection.value = id
-  menuOpen.value = false
-}
-
-const handleScroll = () => {
-  const sections = ['home', 'about', 'events', 'departments', 'projects', 'team','gallery']
-  const scrollPos = window.scrollY + window.innerHeight / 3
-  for (let i = sections.length - 1; i >= 0; i--) {
-    const section = document.getElementById(sections[i])
-    if (section && section.offsetTop <= scrollPos) {
-      activeSection.value = sections[i]
-      break
-    }
-  }
-}
-
-onMounted(() => window.addEventListener('scroll', handleScroll))
-onUnmounted(() => window.removeEventListener('scroll', handleScroll))
-
-const scrollToContact = () => {
-  document.getElementById("contact")?.scrollIntoView({
-    behavior: "smooth",
-    block: "start",
-  });
-}
-</script>
-
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 
-.navbar {
-  position: fixed;
-  top: 1rem;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 95%;
-  max-width: 1200px;
-  padding: 1rem 1.5rem;
-  border-radius: 16px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  backdrop-filter: blur(12px);
-  z-index: 1000;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+
+/* ---------- NAVBAR ---------- */
+
+.navbar{
+
+position:fixed;
+
+top:15px;
+left:50%;
+
+transform:
+translateX(-50%);
+
+width:95%;
+max-width:1250px;
+
+padding:
+18px 30px;
+
+display:flex;
+
+justify-content:
+space-between;
+
+align-items:
+center;
+
+background:
+rgba(255,255,255,.05);
+
+backdrop-filter:
+blur(18px);
+
+border:
+1px solid rgba(
+255,
+255,
+255,
+0.08
+);
+
+border-radius:
+20px;
+
+box-shadow:
+0 10px 35px rgba(
+0,
+0,
+0,
+0.2
+);
+
+z-index:1000;
+
 }
 
-/* Logo */
-.logo {
-  font-family: var(--inter);
-  font-weight: 700;
-  font-size: 1.4rem;
-  color: var(--text-main);
+
+
+/* ---------- LOGO ---------- */
+
+.logo{
+
+font-size:1.6rem;
+
+font-weight:700;
+
+letter-spacing:1px;
+
+cursor:pointer;
+
+transition:.3s;
+
 }
 
-.logo .y {
-  color: var(--accent);
+.logo:hover{
+
+transform:
+scale(1.04);
+
 }
 
-/* Desktop Links */
-.nav-links {
-  list-style: none;
-  display: flex;
-  gap: 2rem;
+.logo .y{
+
+color:
+var(--accent);
+
 }
 
-.nav-links a {
-  text-decoration: none;
-  font-family: var(--inter);
-  font-weight: 500;
-  font-size: 1rem;
-  color: var(--text-main);
-  position: relative;
-  padding-bottom: 4px;
-  transition: color 0.3s ease;
+
+
+/* ---------- DESKTOP LINKS ---------- */
+
+.nav-links{
+
+display:flex;
+
+gap:2rem;
+
+list-style:none;
+
 }
 
-.nav-links a::after {
-  content: '';
-  position: absolute;
-  bottom: -3px;
-  left: 0;
-  width: 0%;
-  height: 2px;
-  background: var(--underline);
-  transition: width 0.3s ease;
+
+.nav-links a{
+
+text-decoration:none;
+
+color:
+var(--text-main);
+
+font-weight:500;
+
+padding-bottom:5px;
+
+position:relative;
+
+transition:.3s;
+
 }
 
-.nav-links a.active::after,
-.nav-links a:hover::after {
-  width: 100%;
+
+.nav-links a:hover{
+
+color:
+var(--accent);
+
 }
 
-/* Nav Buttons */
-.nav-btn {
-  background: var(--accent);
-  border: none;
-  padding: 0.85rem 2rem;
-  border-radius: 12px;
-  font-family: var(--inter);
-  font-weight: 600;
-  font-size: 1rem;
-  color: #fff;
-  cursor: pointer;
-  transition: background 0.3s ease, transform 0.2s ease;
+
+.nav-links a.active{
+
+color:
+var(--accent);
+
 }
 
-.nav-btn:hover {
-  background: var(--accent-hover);
-  transform: scale(1.05);
+
+.nav-links a::after{
+
+content:'';
+
+position:absolute;
+
+left:0;
+bottom:-5px;
+
+width:0;
+
+height:2px;
+
+background:
+var(--accent);
+
+transition:.3s;
+
 }
 
-/* Theme toggle */
-.theme-toggle {
-  width: 46px;
-  height: 46px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+
+.nav-links a:hover::after,
+.nav-links a.active::after{
+
+width:100%;
+
 }
 
-.orbit {
-  position: relative;
-  width: 40px;
-  height: 40px;
+
+
+/* ---------- ACTIONS ---------- */
+
+.nav-actions{
+
+display:flex;
+
+align-items:center;
+
+gap:15px;
+
 }
+
+
+
+/* ---------- CONTACT BUTTON ---------- */
+
+.nav-btn{
+
+background:
+linear-gradient(
+135deg,
+var(--accent),
+#7c3aed
+);
+
+border:none;
+
+padding:
+14px 26px;
+
+border-radius:
+14px;
+
+font-weight:600;
+
+font-size:.95rem;
+
+color:white;
+
+cursor:pointer;
+
+box-shadow:
+0 8px 20px rgba(
+0,
+0,
+0,
+0.2
+);
+
+transition:.3s;
+
+}
+
+
+.nav-btn:hover{
+
+transform:
+translateY(-4px);
+
+}
+
+
+
+/* ---------- THEME TOGGLE ---------- */
+
+.theme-toggle{
+
+width:48px;
+height:48px;
+
+display:flex;
+
+justify-content:center;
+align-items:center;
+
+cursor:pointer;
+
+border-radius:50%;
+
+background:
+rgba(255,255,255,.05);
+
+}
+
+
+.orbit{
+
+position:relative;
+
+width:40px;
+height:40px;
+
+}
+
 
 .sun,
-.moon {
-  position: absolute;
-  font-size: 1.3rem;
-  transition: transform 0.8s cubic-bezier(.4, 0, .2, 1), opacity 0.6s ease;
+.moon{
+
+position:absolute;
+
+top:50%;
+left:50%;
+
+transform:
+translate(-50%,-50%);
+
+transition:.6s;
+
+font-size:1.2rem;
+
 }
 
-.moon {
-  color: white;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) rotate(0deg);
+
+.moon{
+
+color:white;
+
 }
 
-.sun {
-  color: #E31B5A;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) rotate(-180deg);
-  opacity: 0;
+
+.sun{
+
+opacity:0;
+
+color:
+var(--accent);
+
 }
 
-/* Theme Animation */
-[data-theme="light"] .moon {
-  transform: translate(-50%, -150%) rotate(180deg);
-  opacity: 0;
+
+[data-theme="light"] .moon{
+
+opacity:0;
+
+transform:
+translate(-50%,-150%);
+
 }
 
-[data-theme="light"] .sun {
-  transform: translate(-50%, -50%) rotate(0deg);
-  opacity: 1;
+
+[data-theme="light"] .sun{
+
+opacity:1;
+
+transform:
+translate(-50%,-50%);
+
 }
 
-/* Mobile Hamburger */
-.mobile-btn {
-  display: none;
-  background: var(--accent);
-  color: white;
-  border: none;
-  width: 3rem;
-  height: 3rem;
-  border-radius: 50%;
-  font-size: 1.2rem;
-  cursor: pointer;
+
+
+/* ---------- MOBILE BUTTON ---------- */
+
+.mobile-btn{
+
+display:none;
+
+background:
+linear-gradient(
+135deg,
+var(--accent),
+#7c3aed
+);
+
+border:none;
+
+color:white;
+
+width:48px;
+height:48px;
+
+border-radius:50%;
+
+font-size:1.2rem;
+
+cursor:pointer;
+
 }
 
-/* Mobile Menu */
-.mobile-menu {
-  position: absolute;
-  top: 4.5rem;
-  right: 1rem;
-  width: 220px;
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.9rem;
-  background: rgb(220, 214, 214);
-  backdrop-filter: blur(12px);
-  padding: 1.2rem 1rem;
-  border-radius: 16px;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+
+
+/* ---------- MOBILE MENU ---------- */
+
+.mobile-menu{
+
+position:absolute;
+
+top:80px;
+right:10px;
+
+width:230px;
+
+display:flex;
+
+flex-direction:column;
+
+gap:12px;
+
+padding:20px;
+
+border-radius:18px;
+
+background:
+rgba(20,20,25,.95);
+
+backdrop-filter:
+blur(18px);
+
+list-style:none;
+
+box-shadow:
+0 20px 40px rgba(
+0,
+0,
+0,
+0.3
+);
+
 }
 
-.mobile-menu li {
-  width: 100%;
-  text-align: center;
+
+.mobile-menu a{
+
+text-decoration:none;
+
+color:white;
+
+padding:10px;
+
+border-radius:10px;
+
+transition:.3s;
+
 }
 
-.mobile-menu a {
-  display: block;
-  width: 100%;
-  padding: 0.65rem 0;
-  font-size: 1rem;
-  color: var(--accent);
-  text-decoration: none;
-  border-radius: 10px;
-  transition: background 0.25s ease;
+
+.mobile-menu a:hover{
+
+background:
+rgba(
+255,
+255,
+255,
+0.08
+);
+
+color:
+var(--accent);
+
 }
 
-.mobile-menu a:hover {
-  background: rgba(227, 27, 90, 0.12);
+
+
+/* ---------- RESPONSIVE ---------- */
+
+@media(max-width:768px){
+
+.nav-links,
+.nav-btn{
+
+display:none;
+
 }
 
-.mobile-cta .nav-btn {
-  width: 100%;
-  padding: 0.8rem 0;
-  border-radius: 12px;
-  font-size: 1rem;
+
+.mobile-btn{
+
+display:block;
+
 }
 
-.nav-actions {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
+
+.navbar{
+
+padding:
+16px 20px;
+
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-
-  .nav-links,
-  .nav-btn {
-    display: none;
-  }
-
-  .mobile-btn {
-    display: block;
-  }
 }
+
 </style>
