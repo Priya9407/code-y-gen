@@ -93,121 +93,238 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-.events-section {
-  /* min-height: 80vh; */
-  padding: 6rem 0;
-  background: rgba(0, 0, 0, 0.25);
-  backdrop-filter: blur(2px);
-  overflow: hidden;
+
+.events-section{
+  padding:8rem 0;
+  background:rgba(0,0,0,.18);
+  backdrop-filter:blur(10px);
+  overflow:hidden;
 }
 
-.section-title {
-  text-align: center;
-  font-size: 3rem;
-  margin-bottom: 4rem;
+.section-title{
+  text-align:center;
+  font-size:3rem;
+  font-weight:700;
+  margin-bottom:5rem;
 }
 
-.section-title span {
-  color: var(--accent);
+.section-title span{
+  color:var(--accent);
 }
 
 
-.scroll-wrapper {
-  overflow-x: auto;
-  overflow-y: hidden;
-  scrollbar-width: none;
+/* Scroll */
+
+.scroll-wrapper{
+  overflow-x:auto;
+  overflow-y:hidden;
+  scrollbar-width:none;
 }
 
-.scroll-wrapper::-webkit-scrollbar {
-  display: none;
+.scroll-wrapper::-webkit-scrollbar{
+  display:none;
 }
 
-.timeline {
-  position: relative;
-  display: flex;
+
+/* Timeline */
+
+.timeline{
+  position:relative;
+
+  display:flex;
   justify-content:center;
-  gap: 120px;
-  padding: 0 10vw 4rem;
-  min-width: max-content;
+
+  gap:100px;
+
+  padding:
+  0 10vw 5rem;
+
+  min-width:max-content;
 }
 
-.timeline-line {
-  position: absolute;
-  top: 7px;
-  left: 0;
-  height: 2px;
-  width: 100%;
-  background: linear-gradient(to right,
-      transparent,
-      var(--accent),
-      transparent);
+.timeline-line{
+
+  position:absolute;
+
+  top:8px;
+  left:0;
+
+  width:100%;
+  height:2px;
+
+  background:
+  linear-gradient(
+  to right,
+  transparent,
+  var(--accent),
+  transparent
+  );
+
 }
 
-.event {
-  position: relative;
-  min-width: 260px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  cursor: pointer;
+
+/* Event */
+
+.event{
+
+  display:flex;
+
+  flex-direction:column;
+
+  align-items:center;
+
+  cursor:pointer;
+
+  transition:.35s;
+
 }
 
-.dot {
-  width: 14px;
-  height: 14px;
-  background: var(--accent);
-  border-radius: 50%;
-  box-shadow: 0 0 16px rgba(227, 27, 90, 0.9);
-  margin-bottom: 1.2rem;
-  z-index: 2;
+.event:hover{
+
+  transform:
+  translateY(-10px);
+
 }
 
-.poster {
-  width: 220px;
-  height:300px;
-  border-radius: 18px;
-  overflow: hidden;
-  box-shadow: 0 0 30px rgba(227, 27, 90, 0.25);
-  transition: transform 0.4s ease;
+
+/* Dot */
+
+.dot{
+
+  width:16px;
+  height:16px;
+
+  border-radius:50%;
+
+  background:
+  var(--accent);
+
+  box-shadow:
+  0 0 30px
+  rgba(255,46,116,.9);
+
+  margin-bottom:24px;
+
 }
 
-.poster img {
-  width: 220px;
-  height: 300px;
+
+/* Poster */
+
+.poster{
+
+  width:240px;
+  height:320px;
+
+  overflow:hidden;
+
+  border-radius:22px;
+
+  background:
+  rgba(255,255,255,.05);
+
+  backdrop-filter:
+  blur(12px);
+
+  box-shadow:
+  0 15px 40px
+  rgba(0,0,0,.25);
+
+  transition:.4s;
+
+}
+
+.poster img{
+
+  width:100%;
+  height:100%;
+
   object-fit:cover;
-  display: block;
+
+  transition:.4s;
+
 }
 
-.event:hover .poster {
-  transform: translateY(-10px) scale(1.05);
+
+.event:hover .poster{
+
+  transform:
+  scale(1.05);
+
 }
 
-/* INFO — background REMOVED */
-.info {
-  margin-top: 1rem;
-  text-align: center;
-  padding: 1.2rem;
+
+.event:hover img{
+
+  transform:
+  scale(1.08);
+
 }
 
-.info h3 {
-  color: var(--accent);
-  margin-bottom: 0.3rem;
+
+/* Info */
+
+.info{
+
+  margin-top:20px;
+
+  text-align:center;
+
+  max-width:240px;
+
+  padding:15px;
+
+}
+
+.info h3{
+
+  color:
+  var(--accent);
+
+  font-size:1.25rem;
+
+  margin-bottom:8px;
+
 }
 
 .date,
-.venue {
-  font-size: 0.85rem;
-  color: var(--text-muted);
+.venue{
+
+  color:
+  var(--text-muted);
+
+  line-height:1.8;
+
+  font-size:.9rem;
+
 }
 
-@media (max-width: 900px) {
-  .timeline {
-    gap: 60px;
-    padding: 0 2rem 3rem;
-  }
 
-  .poster {
-    width: 180px;
-  }
+/* Mobile */
+
+@media(max-width:900px){
+
+.timeline{
+
+gap:50px;
+
+padding:
+0 30px 4rem;
+
 }
+
+.poster{
+
+width:180px;
+height:250px;
+
+}
+
+.section-title{
+
+font-size:2.2rem;
+
+}
+
+}
+
 </style>
