@@ -98,3 +98,10 @@ video {
   height: auto;
   display: block;
 }
+
+/* Offset for fixed navbar on mobile anchors */
+@media (max-width: 768px) {
+  section:not(#home) {
+    scroll-margin-top: 80px;
+  }
+}

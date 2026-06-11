@@ -2,17 +2,36 @@
   <section id="departments" class="departments-section">
     <h2>Departments</h2>
 
-    <div class="departments-container">
-      <div class="department-card" v-for="dept in departments" :key="dept.title">
-        <h3>{{ dept.title }}</h3>
-        <p>{{ dept.description }}</p>
+    <div 
+      class="departments-container"
+      ref="scrollerRef"
+      @mouseenter="pause"
+      @mouseleave="resume"
+      @touchstart="pause"
+      @touchend="resume"
+    >
+      <div class="scroller__inner" ref="innerRef">
+        <div class="scroller__track" ref="trackRef">
+          <div class="department-card" v-for="dept in departments" :key="'a-' + dept.title">
+            <h3>{{ dept.title }}</h3>
+            <p>{{ dept.description }}</p>
+          </div>
+        </div>
+        
+        <div class="scroller__track duplicate-track">
+          <div class="department-card" v-for="dept in departments" :key="'b-' + dept.title" aria-hidden="true">
+            <h3>{{ dept.title }}</h3>
+            <p>{{ dept.description }}</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 </template>
 
-
 <script setup>
+import { ref, onMounted, onUnmounted } from 'vue';
+
 const departments = [
   {
     title: "Web Development",
@@ -45,6 +64,45 @@ const departments = [
       "Love creating and making things look amazing? The Design team is where creativity runs free — from posters and content to everything fun and visual that defines Code Y-Gen’s vibe.\n\nIf you think in colors, layouts, and ideas, this is your space.",
   },
 ];
+
+const scrollerRef = ref(null);
+const innerRef = ref(null);
+const trackRef = ref(null);
+
+let isPaused = false;
+let animationId;
+
+const step = () => {
+  // Only autoscroll if we are on a mobile-sized screen
+  if (window.innerWidth <= 768 && scrollerRef.value && trackRef.value && innerRef.value && !isPaused) {
+    scrollerRef.value.scrollLeft += 1;
+    
+    // Get gap size from innerRef
+    const gap = parseInt(window.getComputedStyle(innerRef.value).gap) || 0;
+    const scrollDistance = trackRef.value.offsetWidth + gap;
+    
+    if (scrollerRef.value.scrollLeft >= scrollDistance) {
+      scrollerRef.value.scrollLeft -= scrollDistance;
+    }
+  } else if (window.innerWidth > 768 && scrollerRef.value) {
+    // Reset on desktop
+    scrollerRef.value.scrollLeft = 0;
+  }
+  animationId = requestAnimationFrame(step);
+};
+
+const pause = () => isPaused = true;
+const resume = () => isPaused = false;
+
+onMounted(() => {
+  animationId = requestAnimationFrame(step);
+});
+
+onUnmounted(() => {
+  if (animationId) {
+    cancelAnimationFrame(animationId);
+  }
+});
 </script>
 
 <style scoped>
@@ -52,7 +110,7 @@ const departments = [
   padding: 8rem 2rem 6rem;
   background: var(--blur-bg);
   position: relative;
-  opacity:0.7;
+  opacity: 0.7;
 }
 
 .departments-section h2 {
@@ -65,11 +123,23 @@ const departments = [
 .departments-container {
   max-width: 1200px;
   margin: auto;
-  /* Switch to Flexbox for better centering of the "leftovers" */
+}
+
+/* DESKTOP LAYOUT */
+.scroller__inner {
   display: flex;
   flex-wrap: wrap;
   justify-content: center; 
   gap: 2rem;
+}
+
+/* display: contents allows cards to be direct flex children of inner */
+.scroller__track {
+  display: contents;
+}
+
+.duplicate-track {
+  display: none; /* Hide the duplicate infinite track on desktop */
 }
 
 .department-card {
@@ -80,8 +150,6 @@ const departments = [
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   border: 1px solid rgba(255, 255, 255, 0.05);
 
-  /* This ensures 3 cards per row on large screens, 
-     but allows the bottom 2 to center themselves */
   flex: 1 1 350px; 
   max-width: 380px; 
   min-height: 250px;
@@ -89,9 +157,11 @@ const departments = [
   flex-direction: column;
 }
 
-.department-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 40px rgba(227, 27, 90, 0.25);
+@media (hover: hover) {
+  .department-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(227, 27, 90, 0.25);
+  }
 }
 
 .department-card h3 {
@@ -107,10 +177,42 @@ const departments = [
   white-space: pre-line;
 }
 
-/* Responsive adjustment: on very small screens, let them take full width */
-@media (max-width: 480px) {
+/* MOBILE HORIZONTAL SCROLL LAYOUT */
+@media (max-width: 768px) {
+  .departments-container {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding: 0 1rem 1rem 1rem;
+  }
+
+  .departments-container::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scroller__inner {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    gap: 1rem;
+    width: max-content;
+  }
+
+  .scroller__track {
+    display: flex; /* override contents to group them for scrolling */
+    gap: 1rem;
+  }
+
+  .duplicate-track {
+    display: flex; /* Unhide duplicates */
+  }
+
   .department-card {
-    flex: 1 1 100%;
+    /* Prevent shrinking, set strict width for swiping */
+    flex: 0 0 auto;
+    width: 80vw;
+    max-width: 320px;
+    min-height: 280px;
   }
 }
 </style>
