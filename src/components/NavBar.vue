@@ -54,7 +54,7 @@
       <li><a @click="scrollTo('about')">About</a></li>
       <li><a @click="scrollTo('events')">Events</a></li>
       <li><a @click="scrollTo('departments')">Departments</a></li>
-      <li><a @click="scrollTo('projects')">Projects</a></li>
+      <!-- <li><a @click="scrollTo('projects')">Projects</a></li> -->
       <li><a @click="scrollTo('team')">Team</a></li>
       <li><a @click="scrollTo('gallery')">Gallery</a></li>
       <li class="mobile-cta">

@@ -5,33 +5,33 @@
       <!-- BRAND -->
       <div class="footer-brand">
         <h2>CodeYGen</h2>
-        <p>Where Code Meets Creativity.</p>
+        <p class="brand-desc">Where Code Meets Creativity.</p>
       </div>
 
       <!-- LINKS -->
       <div class="footer-links">
-        <h4>Quick Links</h4>
-        <a href="#home">Home</a>
-        <a href="#about">About</a>
-        <a href="#events">Events</a>
-        <a href="#contact">Contact</a>
+        <h4 class="links-title">Quick Links</h4>
+        <div class="links-wrapper">
+          <a href="#home">Home</a>
+          <a href="#about">About</a>
+          <a href="#events">Events</a>
+          <a href="#contact">Contact</a>
+        </div>
       </div>
 
       <!-- CONTACT -->
       <div class="footer-contact">
-        <h4>Contact Us</h4>
-        <a href="mailto:codeygenzclub@gmail.com">codeygenzclub@gmail.com</a>
+        <h4 class="contact-title">Contact Us</h4>
+        <a class="email-link" href="mailto:codeygenzclub@gmail.com">codeygenzclub@gmail.com</a>
 
         <div class="socials">
           <div class="social-links">
             <a href="https://www.instagram.com/codeygenvitc/" aria-label="Instagram" target="_blank">
               <i class="fa-brands fa-instagram"></i>
             </a>
-
             <a href="https://linkedin.com/in/yourpage" aria-label="LinkedIn" target="_blank">
               <i class="fa-brands fa-linkedin-in"></i>
             </a>
-
             <a href="https://www.youtube.com/@Codeygen" aria-label="YouTube" target="_blank">
               <i class="fa-brands fa-youtube"></i>
             </a>
@@ -73,20 +73,20 @@
   margin-bottom: 0.5rem;
 }
 
-.footer-brand p {
+.brand-desc {
   color: var(--text-muted);
   max-width: 260px;
 }
 
 /* LINKS & CONTACT */
-.footer-links h4,
-.footer-contact h4 {
+.links-title,
+.contact-title {
   margin-bottom: 1rem;
   color: var(--text-main);
 }
 
 .footer-links a,
-.footer-contact a {
+.email-link {
   display: block;
   margin-bottom: 0.6rem;
   color: var(--text-muted);
@@ -95,23 +95,27 @@
 }
 
 .footer-links a:hover,
-.footer-contact a:hover {
+.email-link:hover {
   color: var(--accent);
 }
 
 /* SOCIALS */
 .socials {
-  display: flex;
-  gap: 1rem;
   margin-top: 1rem;
 }
 
-.socials a {
+.social-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.social-links a {
   font-size: 1.3rem;
+  color: var(--text-muted);
   transition: transform 0.3s ease, color 0.3s ease;
 }
 
-.socials a:hover {
+.social-links a:hover {
   transform: translateY(-3px);
   color: var(--accent);
 }
@@ -126,14 +130,54 @@
   border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-/* MOBILE */
-@media (max-width: 600px) {
+/* MOBILE - COMPACT HORIZONTAL LAYOUT */
+@media (max-width: 768px) {
   .footer {
-    text-align: center;
+    padding: 1.5rem 2rem;
+  }
+
+  .footer-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  /* Hide links and contact text, but keep brand, socials, and copyright */
+  .brand-desc,
+  .links-title,
+  .contact-title,
+  .email-link,
+  .footer-links {
+    display: none;
+  }
+
+  .footer-brand h2 {
+    font-size: 1.5rem;
+    margin: 0;
+  }
+
+  .footer-contact {
+    display: flex;
+    align-items: center;
   }
 
   .socials {
+    margin-top: 0;
+  }
+
+  .social-links {
+    display: flex;
+    gap: 1rem;
     justify-content: center;
+    align-items: center;
+  }
+
+  .footer-bottom {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    font-size: 0.75rem;
   }
 }
 </style>

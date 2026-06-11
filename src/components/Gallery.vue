@@ -2,39 +2,78 @@
   <section id="gallery" class="gallery-section">
     <h2>Gallery</h2>
     
-    <div class="scroller">
-      <div class="scroller__inner">
-        <img 
-          v-for="(url, index) in imageUrls" 
-          :key="'a-' + index" 
-          :src="url" 
-          alt="Gallery Image" 
-        />
-        <img 
-          v-for="(url, index) in imageUrls" 
-          :key="'b-' + index" 
-          :src="url" 
-          aria-hidden="true" 
-        />
+    <div 
+      class="scroller" 
+      ref="scrollerRef"
+      @mouseenter="pause"
+      @mouseleave="resume"
+      @touchstart="pause"
+      @touchend="resume"
+    >
+      <div class="scroller__inner" ref="innerRef">
+        <div class="scroller__track" ref="trackRef">
+          <img 
+            v-for="(url, index) in imageUrls" 
+            :key="'a-' + index" 
+            :src="url" 
+            alt="Gallery Image" 
+          />
+        </div>
+        <div class="scroller__track">
+          <img 
+            v-for="(url, index) in imageUrls" 
+            :key="'b-' + index" 
+            :src="url" 
+            aria-hidden="true" 
+          />
+        </div>
       </div>
     </div>
   </section>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 
 const imageUrls = ref([]);
+const scrollerRef = ref(null);
+const innerRef = ref(null);
+const trackRef = ref(null);
+
+let isPaused = false;
+let animationId;
+
+const step = () => {
+  if (scrollerRef.value && trackRef.value && innerRef.value && !isPaused) {
+    scrollerRef.value.scrollLeft += 1;
+    
+    // Parse the gap from computed style
+    const gap = parseInt(window.getComputedStyle(innerRef.value).gap) || 0;
+    const scrollDistance = trackRef.value.offsetWidth + gap;
+    
+    // If we've scrolled past the first track, seamlessly jump back
+    if (scrollerRef.value.scrollLeft >= scrollDistance) {
+      scrollerRef.value.scrollLeft -= scrollDistance;
+    }
+  }
+  animationId = requestAnimationFrame(step);
+};
+
+const pause = () => isPaused = true;
+const resume = () => isPaused = false;
 
 onMounted(() => {
-  /** * Vite's glob import: 
-   * This automatically finds all images in your 'gallerypics' folder.
-   * Based on your file structure, the path is '../gallerypics/'
-   */
   const images = import.meta.glob('../gallerypics/*.{png,jpg,jpeg,svg,webp}', { eager: true });
-  
-  // Extract the URL for each imported image
   imageUrls.value = Object.values(images).map((mod) => mod.default);
+  
+  // Start animation loop
+  animationId = requestAnimationFrame(step);
+});
+
+onUnmounted(() => {
+  if (animationId) {
+    cancelAnimationFrame(animationId);
+  }
 });
 </script>
 
@@ -42,8 +81,7 @@ onMounted(() => {
 .gallery-section {
   padding: 6rem 0;
   background: var(--bg-section);
-  overflow: hidden; /* Critical to hide the overflow of the long image row */
-  opacity:0.7;
+  opacity: 0.7;
 }
 
 .gallery-section h2 {
@@ -55,26 +93,31 @@ onMounted(() => {
 
 .scroller {
   width: 100%;
-  display: flex;
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
+  /* Hide scrollbar for a cleaner look */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* IE and Edge */
+  padding: 1rem 0;
+}
+
+.scroller::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
 }
 
 .scroller__inner {
   display: flex;
   gap: 2rem;
-  padding-block: 1rem;
   width: max-content;
-  flex-wrap: nowrap;
-  /* Adjust the '40s' to make the scroll faster or slower */
-  animation: scroll-left 40s linear infinite;
+  padding: 0 2rem;
 }
 
-/* Pause the animation when a user hovers over an image */
-.scroller:hover .scroller__inner {
-  animation-play-state: paused;
+.scroller__track {
+  display: flex;
+  gap: 2rem;
 }
 
-.scroller__inner img {
+.scroller__track img {
   width: 350px;
   height: 250px;
   object-fit: cover;
@@ -82,25 +125,26 @@ onMounted(() => {
   border: 1px solid rgba(255, 255, 255, 0.1);
   background: var(--card);
   transition: transform 0.3s ease;
+  flex-shrink: 0;
 }
 
-.scroller__inner img:hover {
-  transform: scale(1.05);
-}
-
-@keyframes scroll-left {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    /* Moves the row by exactly half (one full set of images) */
-    transform: translateX(calc(-50% - 1rem));
+/* Hover effect only on devices that support hover (desktops/laptops) */
+@media (hover: hover) {
+  .scroller__track img:hover {
+    transform: scale(1.05);
   }
 }
 
 /* Mobile adjustments */
 @media (max-width: 768px) {
-  .scroller__inner img {
+  .scroller__inner {
+    padding: 0 1rem;
+    gap: 1rem;
+  }
+  .scroller__track {
+    gap: 1rem;
+  }
+  .scroller__track img {
     width: 280px;
     height: 200px;
   }

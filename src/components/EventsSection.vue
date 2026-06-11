@@ -257,6 +257,20 @@ const events = [
 @media (max-width: 900px) {
   .event-card {
     grid-template-columns: 1fr;
+    justify-self: auto;
+  }
+
+  .event-card:nth-child(even) {
+    grid-template-columns: 1fr;
+    justify-self: auto;
+  }
+
+  .event-card:nth-child(even) .poster {
+    order: 1;
+  }
+
+  .event-card:nth-child(even) .event-body {
+    order: 2;
   }
 
   .poster {

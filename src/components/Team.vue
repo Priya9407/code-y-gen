@@ -35,7 +35,7 @@ const team = [
   { name: "Architaa A", designation: "Deputy Secretary", email: "architaa.a2024@vitstudent.ac.in", image: architaaImg },
   { name: "Nithya Kalaichelvan", designation: "Joint Secretary", email: "nithya.k2024@vitstudent.ac.in", image: nithyaImg },
   { name: "Abhiram Anil", designation: "Partnership Lead", email: "abhiramanil2024@vitstudent.ac.in", image: abhiramImg },
-  { name: "Hari Hara Sudhan", designation: "AI/ML Lead", email: "hariharasudhan2024@vitstudent.ac.in", image: hariImg },
+  { name: "Hari Hara Sudhan", designation: "AI/ML Lead", email: "hari.harasudhan2024@vitstudent.ac.in", image: hariImg },
   { name: "Joshitha Ramesh", designation: "Design Lead", email: "joshitha.ramesh2024@vitstudent.ac.in", image: joshithaImg },
   { name: "Priya Dharshini V", designation: "Web Development Lead", email: "priydharshini.v2024a@vitstudent.ac.in", image: priyaImg },
   { name: "M Yoharudran Atsilia", designation: "Outreach Lead", email: "yoharudranatsilia.m2024@vitstudent.ac.in", image: yohaImg }
