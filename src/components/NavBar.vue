@@ -1,11 +1,11 @@
 <template>
-  <nav class="navbar">
+  <nav class="navbar" :class="{ 'navbar-home': activeSection === 'home' }">
     <div class="logo">
       Code<span class="y">Y</span>Gen
     </div>
 
     <!-- Desktop Links -->
-    
+
     <ul class="nav-links">
       <li>
         <a href="#home" :class="{ active: activeSection === 'home' }" @click.prevent="scrollTo('home')">Home</a>
@@ -17,25 +17,26 @@
         <a href="#events" :class="{ active: activeSection === 'events' }" @click.prevent="scrollTo('events')">Events</a>
       </li>
       <li>
-        <a href="#departments" :class="{ active: activeSection === 'departments' }" @click.prevent="scrollTo('departments')">Departments</a>
+        <a href="#departments" :class="{ active: activeSection === 'departments' }"
+          @click.prevent="scrollTo('departments')">Departments</a>
       </li>
       <li>
         <a href="#team" :class="{ active: activeSection === 'team' }" @click.prevent="scrollTo('team')">Team</a>
       </li>
       <li>
-        <a href="#gallery" :class="{ active: activeSection === 'gallery' }" @click.prevent="scrollTo('gallery')">Gallery</a>
+        <a href="#gallery" :class="{ active: activeSection === 'gallery' }"
+          @click.prevent="scrollTo('gallery')">Gallery</a>
       </li>
     </ul>
-    
+
 
     <div class="nav-actions">
-      <!-- Theme Toggle -->
-      <div class="theme-toggle" @click="toggleTheme">
+      <!-- <div class="theme-toggle" @click="toggleTheme">
         <div class="orbit">
           <i class="fa-solid fa-moon moon"></i>
           <i class="fa-solid fa-sun sun"></i>
         </div>
-      </div>
+      </div> -->
 
       <!-- Contact Button -->
       <button class="nav-btn" @click="scrollToContact">Contact Us</button>
@@ -92,7 +93,7 @@ const scrollTo = (id) => {
 }
 
 const handleScroll = () => {
-  const sections = ['home', 'about', 'events', 'departments', 'projects', 'team','gallery']
+  const sections = ['home', 'about', 'events', 'departments', 'projects', 'team', 'gallery']
   const scrollPos = window.scrollY + window.innerHeight / 3
   for (let i = sections.length - 1; i >= 0; i--) {
     const section = document.getElementById(sections[i])
@@ -130,7 +131,15 @@ const scrollToContact = () => {
   justify-content: space-between;
   align-items: center;
   backdrop-filter: blur(12px);
+  background: var(--menu-bg);
+  border: 1px solid var(--border-strong);
   z-index: 1000;
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.navbar-home {
+  background: transparent;
+  border: none;
 }
 
 /* Logo */
@@ -271,7 +280,7 @@ const scrollToContact = () => {
   flex-direction: column;
   align-items: center;
   gap: 0.9rem;
-  background: rgb(220, 214, 214);
+  background: var(--menu-bg);
   backdrop-filter: blur(12px);
   padding: 1.2rem 1rem;
   border-radius: 16px;

@@ -16,7 +16,7 @@
         <span v-if="showCursor" class="cursor">|</span>
       </h1>
 
-      <p>Code for the young generation 🚀</p>
+      <p>Code for the young generation</p>
     </div>
   </section>
 </template>

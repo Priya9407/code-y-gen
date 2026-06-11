@@ -19,16 +19,16 @@
         <!-- EXTRA CONTENT -->
         <div class="contact-points">
           <div class="point">
-            <span>🚀</span>
-            <p>Collaborate with passionate developers & creators</p>
+            <div class="point-label">Collaborate</div>
+            <p>Work with passionate developers and creators.</p>
           </div>
           <div class="point">
-            <span>🎯</span>
-            <p>Get updates about workshops, hackathons & events</p>
+            <div class="point-label">Stay Updated</div>
+            <p>Receive news about workshops, hackathons, and events.</p>
           </div>
           <div class="point">
-            <span>💡</span>
-            <p>Share ideas, feedback, or partnership queries</p>
+            <div class="point-label">Share Ideas</div>
+            <p>Send your feedback or partnership questions.</p>
           </div>
         </div>
       </div>
@@ -66,7 +66,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(0, 0, 0, 0.22);
+  background: var(--section-bg);
   backdrop-filter: blur(1px);
 }
 
@@ -115,21 +115,23 @@
 
 .point {
   display: flex;
-  align-items: flex-start;
-  gap: 0.8rem;
+  flex-direction: column;
+  gap: 0.5rem;
   color: var(--text-muted);
 }
 
-.point span {
-  font-size: 1.2rem;
+.point-label {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--accent);
 }
 
 /* CARD */
 .contact-card {
-  background: rgba(79, 79, 79, 0.55);
+  background: var(--card);
   border-radius: 28px;
   padding: 3rem;
-  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.18);
+  box-shadow: 0 30px 70px var(--shadow-color);
 }
 
 /* FIELDS */
@@ -149,12 +151,12 @@
 .field textarea {
   padding: 0.9rem 1rem;
   border-radius: 14px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--input-border);
   font-size: 0.95rem;
   outline: none;
   transition: 0.25s ease;
-  background:rgb(113, 104, 104);
-  color: rgb(254, 252, 252);
+  background: var(--input-bg);
+  color: var(--text-main);
 }
 
 .field textarea {

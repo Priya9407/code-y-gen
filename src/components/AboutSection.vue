@@ -18,10 +18,10 @@
         </p>
 
         <div class="pill-row">
-          <span class="pill">🚀 Build First</span>
-          <span class="pill">💡 Learn Together</span>
-          <span class="pill">⚙️ Real Projects</span>
-          <span class="pill">🤝 Strong Community</span>
+          <span class="pill">Build First</span>
+          <span class="pill">Learn Together</span>
+          <span class="pill">Real Projects</span>
+          <span class="pill">Strong Community</span>
         </div>
       </div>
 
@@ -113,8 +113,8 @@
   border-radius: 999px;
   font-size: 0.9rem;
 
-  background: rgba(227, 27, 90, 0.15);
-  border: 1px solid rgba(227, 27, 90, 0.35);
+  background: rgba(227, 27, 90, 0.1);
+  border: 1px solid rgba(227, 27, 90, 0.3);
 }
 
 /* stats cards */
@@ -125,20 +125,21 @@
 }
 
 .glass-card {
-  background: var(--card); /* NOT solid */
+  background: var(--card);
+  /* NOT solid */
   border-radius: 18px;
   padding: 2.2rem;
   text-align: center;
 
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 0 30px rgba(227, 27, 90, 0.15);
+  border: 1px solid rgba(227, 27, 90, 0.12);
+  box-shadow: 0 0 30px rgba(227, 27, 90, 0.1);
 
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .glass-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 0 45px rgba(227, 27, 90, 0.35);
+  box-shadow: 0 0 45px rgba(227, 27, 90, 0.2);
 }
 
 .glass-card h3 {
@@ -168,7 +169,7 @@
     gap: 3rem;
   }
 
-  .about-content h2 { 
+  .about-content h2 {
     font-size: 2.4rem;
   }
 }

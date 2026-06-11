@@ -1,4 +1,5 @@
-<template> <section id="team" class="team-section">
+<template>
+  <section id="team" class="team-section">
     <h2>Our Team</h2>
     <div class="team-container">
       <div class="team-card" v-for="member in team" :key="member.email">
@@ -45,9 +46,10 @@ const team = [
 .team-section {
   padding: 6rem 2rem;
   /* Remove opacity: 0.7; as it hides your content */
-  background: var(--bg-section); /* Use a solid background variable */
+  background: var(--bg-section);
+  /* Use a solid background variable */
   position: relative;
-  opacity:0.7;
+  opacity: 0.7;
 }
 
 .team-section h2 {
@@ -72,7 +74,8 @@ const team = [
   padding: 1.5rem;
   border-radius: 20px;
   border: 1px solid rgba(255, 255, 255, 0.05);
-  display: flex; /* Aligns image left, text right */
+  display: flex;
+  /* Aligns image left, text right */
   align-items: center;
   gap: 1.5rem;
   transition: transform 0.3s ease;
@@ -90,7 +93,8 @@ const team = [
 .image-container img {
   width: 100px;
   height: 100px;
-  border-radius: 50%; /* Circular image as per sketch */
+  border-radius: 50%;
+  /* Circular image as per sketch */
   object-fit: cover;
   border: 2px solid var(--accent);
 }
@@ -131,6 +135,7 @@ const team = [
   .team-container {
     grid-template-columns: 1fr;
   }
+
   .team-card {
     flex-direction: column;
     text-align: center;

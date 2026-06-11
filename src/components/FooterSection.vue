@@ -52,7 +52,7 @@
 
 <style scoped>
 .footer {
-  background: rgba(0, 0, 0, 0.4);
+  background: var(--panel-bg);
   backdrop-filter: blur(6px);
   padding: 4rem 8vw 1.5rem;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
@@ -82,7 +82,7 @@
 .footer-links h4,
 .footer-contact h4 {
   margin-bottom: 1rem;
-  color: #fff;
+  color: var(--text-main);
 }
 
 .footer-links a,
