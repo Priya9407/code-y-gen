@@ -1,6 +1,6 @@
 <template>
   <section id="gallery" class="gallery-section">
-    <h2>Gallery</h2>
+    <h2 v-reveal>Gallery</h2>
     
     <div 
       class="scroller" 

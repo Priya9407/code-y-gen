@@ -1,13 +1,13 @@
 <template>
   <section id="events" class="events-section">
-    <div class="section-header">
+    <div class="section-header" v-reveal>
       <span>Upcoming</span>
       <h2>Events</h2>
       <p>Explore our latest gatherings and workshops, designed to fuel creativity and fast-track your skills.</p>
     </div>
 
     <div class="events-grid">
-      <article v-for="(event, index) in events" :key="index" class="event-card">
+      <article v-for="(event, index) in events" :key="index" class="event-card" v-reveal="(index % 2) + 1">
         <div class="poster">
           <img :src="event.poster" :alt="event.title" />
         </div>

@@ -1,6 +1,6 @@
 <template>
   <section id="departments" class="departments-section">
-    <h2>Departments</h2>
+    <h2 v-reveal>Departments</h2>
 
     <div 
       class="departments-container"
@@ -12,14 +12,14 @@
     >
       <div class="scroller__inner" ref="innerRef">
         <div class="scroller__track" ref="trackRef">
-          <div class="department-card" v-for="dept in departments" :key="'a-' + dept.title">
+          <div class="department-card" v-for="(dept, index) in departments" :key="'a-' + dept.title" v-reveal="(index % 3) + 1">
             <h3>{{ dept.title }}</h3>
             <p>{{ dept.description }}</p>
           </div>
         </div>
         
         <div class="scroller__track duplicate-track">
-          <div class="department-card" v-for="dept in departments" :key="'b-' + dept.title" aria-hidden="true">
+          <div class="department-card" v-for="(dept, index) in departments" :key="'b-' + dept.title" aria-hidden="true" v-reveal="(index % 3) + 1">
             <h3>{{ dept.title }}</h3>
             <p>{{ dept.description }}</p>
           </div>
